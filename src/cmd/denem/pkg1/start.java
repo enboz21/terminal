@@ -19,6 +19,9 @@ public class start {
             else if (böl[0].equals("dir")) {
                 kod.içindekiler();
             }
+            else if (böl[0].equals("exit")) {
+                System.exit(0);
+            }
         }
     }
 
