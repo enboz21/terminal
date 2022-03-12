@@ -14,7 +14,10 @@ public class start {
             met=K.nextLine();
             String []böl=met.split(" ", 2);
             if (böl[0].equals("cd")) { 
-                kod.setKonum(böl[1]);
+                if (böl[1].equals("..")) {
+                    kod.setKonum(böl[1]);
+                }
+                else kod.dosyakontrol(böl[1]);
             }
             else if (böl[0].equals("dir")) {
                 kod.içindekiler();

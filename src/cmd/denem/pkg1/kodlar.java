@@ -23,7 +23,6 @@ public class kodlar {
             for (int i = kelimd.length() - 1; i >= 0; i--) {
                 a += kelimd.charAt(i);
             }
-            System.out.println(a);
             String met = a;
             String b = "";
             String f = "/";
@@ -32,7 +31,6 @@ public class kodlar {
             for (int i = kelim.length() - 1; i >= 0; i--) {
                 b += kelim.charAt(i);
             }
-
             this.konum = "";
             String s = "";
             if (b.charAt(b.length() - 1) == '/') {
@@ -53,8 +51,7 @@ public class kodlar {
                     this.konum = b;
                 }
             }
-        } 
-        else {
+        } else {
             int b = this.konum.length();
             if (this.konum.charAt(b - 1) == '/') {
                 String a = this.konum;
@@ -73,6 +70,22 @@ public class kodlar {
         String dosyalar[] = klasor.list();
         for (int i = 0; i < dosyalar.length; i++) {
             System.out.println(dosyalar[i]);
+        }
+    }
+
+    public void dosyakontrol(String konum) {
+        File klasor = new File(this.konum);
+        String dosyalar[] = klasor.list();
+        boolean a = false;
+        for (int i = 0; i < dosyalar.length; i++) {
+            dosyalar[i] = dosyalar[i].toLowerCase();
+            if (dosyalar[i].equals(konum)) {
+                setKonum(konum);
+                a = true;
+            }
+        }
+        if (a == false) {
+            System.out.println("yanlış dosya ismi");
         }
     }
 }
