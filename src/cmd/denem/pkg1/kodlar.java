@@ -1,7 +1,10 @@
 package cmd.denem.pkg1;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class kodlar {
 
@@ -105,6 +108,30 @@ public class kodlar {
         else{
             File f=new File(this.konum+"/"+isim);
             f.delete();
+        }
+    }
+    
+    public void klasöroluşturma(String dosya_ismi){
+        File f=new File(this.konum+"/"+dosya_ismi);
+        if (f.exists()) {
+            System.out.println("klasör zaten var");
+        }
+        else{
+            f.mkdir();
+        }
+    }
+    
+    public void dosyaoluşturma(String dosya_ismi){
+        File f=new File(this.konum+"/"+dosya_ismi);
+        if (f.exists()) {
+            System.out.println("dosya zaten var");
+        }
+        else{
+            try {
+                f.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(kodlar.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

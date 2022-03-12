@@ -28,6 +28,12 @@ public class start {
             else if (böl[0].equals("rm")) {
                 kod.klasörsil(böl[1]);
             }
+            else if (böl[0].equals("mkdir")) {
+                kod.klasöroluşturma(böl[1]);
+            }
+            else if (böl[0].equals("mk")) {
+                kod.dosyaoluşturma(böl[1]);
+            }
         }
     }
 
