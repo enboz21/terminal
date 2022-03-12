@@ -88,4 +88,23 @@ public class kodlar {
             System.out.println("yanlış dosya ismi");
         }
     }
+
+    public void klasörsil(String isim) {
+        File klasor = new File(this.konum);
+        String dosyalar[] = klasor.list();
+        boolean a = false;
+        for (int i = 0; i < dosyalar.length; i++) {
+            dosyalar[i] = dosyalar[i].toLowerCase();
+            if (dosyalar[i].equals(isim)) {
+                a = true;
+            }
+        }
+        if (a==false) {
+            System.out.println("bu isimde dosya yok");
+        }
+        else{
+            File f=new File(this.konum+"/"+isim);
+            f.delete();
+        }
+    }
 }

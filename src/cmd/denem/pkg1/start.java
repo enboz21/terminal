@@ -25,6 +25,9 @@ public class start {
             else if (böl[0].equals("exit")) {
                 System.exit(0);
             }
+            else if (böl[0].equals("rm")) {
+                kod.klasörsil(böl[1]);
+            }
         }
     }
 
