@@ -34,6 +34,15 @@ public class start {
             else if (böl[0].equals("mk")) {
                 kod.dosyaoluşturma(böl[1]);
             }
+            else if (böl[0].equals("help")) {
+                System.out.println("dir: dizindeki dosyaları gösterir ");
+                System.out.println("cd <hedef>: sizi yazılı olan yere götürü");
+                System.out.println("exit: sistemi kapatır");
+                System.out.println("rm <hedef>: dosya veya klasör kaldırır");
+                System.out.println("mk <hedef>: dosya oluşturu");
+                System.out.println("mkdir <hedef>: klasör oluşturu");
+            }
+            
         }
     }
 
