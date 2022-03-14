@@ -45,6 +45,7 @@ public class start {
                 System.out.println("mk <hedef>: dosya oluşturu");
                 System.out.println("mkdir <hedef>: klasör oluşturu");
                 System.out.println("cop <copyalanıcak öğe> <oluşacak dosyanın konumu ve adı>: dosyaları bir yere kopyalar");
+                
             }
             else if (böl[0].equals("cop")) {
                 try {
@@ -52,6 +53,9 @@ public class start {
                 } catch (IOException ex) {
                     Logger.getLogger(start.class.getName()).log(Level.SEVERE, null, ex);
                 }
+            }
+            else if (böl[0].equals("exe")) {
+                kod.exe(böl[1]);
             }
             
         }

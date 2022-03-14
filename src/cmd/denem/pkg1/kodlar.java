@@ -116,11 +116,21 @@ public class kodlar {
     }
 
     public void klasöroluşturma(String dosya_ismi) {
+        if (dosya_ismi.charAt(0)=='C') {
+            File f = new File(dosya_ismi);
+        if (f.exists()) {
+            System.out.println("klasör zaten var");
+        } else {
+            f.mkdir();
+        }
+        }
+        else{
         File f = new File(this.konum + "/" + dosya_ismi);
         if (f.exists()) {
             System.out.println("klasör zaten var");
         } else {
             f.mkdir();
+        }
         }
     }
 
@@ -139,20 +149,54 @@ public class kodlar {
 
     public void dosyakopyalama(String hedef) throws FileNotFoundException, IOException {
         String[] böl = hedef.split(" ", 2);
-            hedef = böl[0];
-            String hedefkonum=böl[1];
-        FileInputStream fis = new FileInputStream(this.konum + "/" + hedef);
-        BufferedInputStream oku = new BufferedInputStream(fis);
-        FileOutputStream fos = new FileOutputStream(hedefkonum);
-        BufferedOutputStream yazici = new BufferedOutputStream(fos);
-        int veri=0;
-        while ((veri =oku.read())!= -1) {            
-            byte girdi =(byte)veri;
-            System.out.println("byte : "+girdi);
-            yazici.write(girdi);
+        hedef = böl[0];
+        String hedefkonum = böl[1];
+        File file = new File(böl[0]);
+        if (file.isFile()== false) {
+            setKonum(böl[0]);
+            File klasor = new File(this.konum);
+            String dosyalar[] = klasor.list();
+            klasöroluşturma(hedefkonum);
+            for (int i = 0; i < dosyalar.length; i++) {
+                
+                FileInputStream fis = new FileInputStream(this.konum + "/" +dosyalar[i]);
+                BufferedInputStream oku = new BufferedInputStream(fis);
+                klasöroluşturma(hedefkonum);
+                FileOutputStream fos = new FileOutputStream(hedefkonum+"/"+dosyalar[i]);
+                BufferedOutputStream yazici = new BufferedOutputStream(fos);
+                int veri = 0;
+                while ((veri = oku.read()) != -1) {
+                    byte girdi = (byte) veri;
+                    System.out.println("byte : " + girdi);
+                    yazici.write(girdi);
+                }
+                yazici.flush();
+                yazici.close();
+                oku.close();
+            }
+
+        } else {
+            FileInputStream fis = new FileInputStream(this.konum + "/" + hedef);
+            BufferedInputStream oku = new BufferedInputStream(fis);
+            FileOutputStream fos = new FileOutputStream(hedefkonum);
+            BufferedOutputStream yazici = new BufferedOutputStream(fos);
+            int veri = 0;
+            while ((veri = oku.read()) != -1) {
+                byte girdi = (byte) veri;
+                System.out.println("byte : " + girdi);
+                yazici.write(girdi);
+            }
+            yazici.flush();
+            yazici.close();
+            oku.close();
         }
-        yazici.flush();
-        yazici.close();
-        oku.close();
+    }
+    public void exe(String programexe){
+        Runtime rt= Runtime.getRuntime();
+        try {
+            Process P=rt.exec(this.konum+"/"+programexe);
+        } catch (IOException ex) {
+            Logger.getLogger(kodlar.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
