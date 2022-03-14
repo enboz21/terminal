@@ -1,6 +1,11 @@
 package cmd.denem.pkg1;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -102,36 +107,52 @@ public class kodlar {
                 a = true;
             }
         }
-        if (a==false) {
+        if (a == false) {
             System.out.println("bu isimde dosya yok");
-        }
-        else{
-            File f=new File(this.konum+"/"+isim);
+        } else {
+            File f = new File(this.konum + "/" + isim);
             f.delete();
         }
     }
-    
-    public void klasöroluşturma(String dosya_ismi){
-        File f=new File(this.konum+"/"+dosya_ismi);
+
+    public void klasöroluşturma(String dosya_ismi) {
+        File f = new File(this.konum + "/" + dosya_ismi);
         if (f.exists()) {
             System.out.println("klasör zaten var");
-        }
-        else{
+        } else {
             f.mkdir();
         }
     }
-    
-    public void dosyaoluşturma(String dosya_ismi){
-        File f=new File(this.konum+"/"+dosya_ismi);
+
+    public void dosyaoluşturma(String dosya_ismi) {
+        File f = new File(this.konum + "/" + dosya_ismi);
         if (f.exists()) {
             System.out.println("dosya zaten var");
-        }
-        else{
+        } else {
             try {
                 f.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(kodlar.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public void dosyakopyalama(String hedef) throws FileNotFoundException, IOException {
+        String[] böl = hedef.split(" ", 2);
+            hedef = böl[0];
+            String hedefkonum=böl[1];
+        FileInputStream fis = new FileInputStream(this.konum + "/" + hedef);
+        BufferedInputStream oku = new BufferedInputStream(fis);
+        FileOutputStream fos = new FileOutputStream(hedefkonum);
+        BufferedOutputStream yazici = new BufferedOutputStream(fos);
+        int veri=0;
+        while ((veri =oku.read())!= -1) {            
+            byte girdi =(byte)veri;
+            System.out.println("byte : "+girdi);
+            yazici.write(girdi);
+        }
+        yazici.flush();
+        yazici.close();
+        oku.close();
     }
 }
